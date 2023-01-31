@@ -2,10 +2,9 @@
 
 use futures::Stream;
 
-use crate::{
-    packet::{NetlinkMessage, XfrmMessage},
-    Error, PolicyHandle, StateHandle,
-};
+use crate::{Error, PolicyHandle, StateHandle};
+use netlink_packet_core::NetlinkMessage;
+use netlink_packet_xfrm::XfrmMessage;
 use netlink_proto::{sys::SocketAddr, ConnectionHandle};
 
 #[derive(Clone, Debug)]

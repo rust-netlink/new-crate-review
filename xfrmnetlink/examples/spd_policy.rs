@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: MIT
 
 use std::env;
-
 use xfrmnetlink::{new_connection, Error, Handle};
 
 mod cli_parse;

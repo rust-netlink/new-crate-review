@@ -19,8 +19,7 @@ pub struct StateGetSadInfoRequest {
 
 impl StateGetSadInfoRequest {
     pub(crate) fn new(handle: Handle) -> Self {
-        let mut message = GetSadInfoMessage::default();
-        message.flags = u32::MAX;
+        let message = GetSadInfoMessage { flags: u32::MAX };
 
         StateGetSadInfoRequest { handle, message }
     }
@@ -38,7 +37,7 @@ impl StateGetSadInfoRequest {
 
         let mut response = handle.request(req)?;
 
-        while let Some(msg) = response.next().await {
+        if let Some(msg) = response.next().await {
             return Ok(try_xfrmnl!(msg, XfrmMessage::NewSadInfo));
         }
         Err(Error::RequestFailed)

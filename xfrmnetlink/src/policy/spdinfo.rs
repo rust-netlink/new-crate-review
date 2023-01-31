@@ -19,8 +19,7 @@ pub struct PolicyGetSpdInfoRequest {
 
 impl PolicyGetSpdInfoRequest {
     pub(crate) fn new(handle: Handle) -> Self {
-        let mut message = GetSpdInfoMessage::default();
-        message.flags = u32::MAX;
+        let message = GetSpdInfoMessage { flags: u32::MAX };
 
         PolicyGetSpdInfoRequest { handle, message }
     }
@@ -38,7 +37,7 @@ impl PolicyGetSpdInfoRequest {
 
         let mut response = handle.request(req)?;
 
-        while let Some(msg) = response.next().await {
+        if let Some(msg) = response.next().await {
             return Ok(try_xfrmnl!(msg, XfrmMessage::NewSpdInfo));
         }
         Err(Error::RequestFailed)
@@ -58,8 +57,10 @@ pub struct PolicySetSpdInfoRequest {
 
 impl PolicySetSpdInfoRequest {
     pub(crate) fn new(handle: Handle) -> Self {
-        let mut message = NewSpdInfoMessage::default();
-        message.flags = u32::MAX;
+        let message = NewSpdInfoMessage {
+            flags: u32::MAX,
+            ..Default::default()
+        };
 
         PolicySetSpdInfoRequest { handle, message }
     }

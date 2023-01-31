@@ -3,17 +3,9 @@
 //! This example opens a netlink socket, listens for xfrm events, and prints the received messages.
 
 use futures::stream::StreamExt;
-
-use xfrmnetlink::{
-    new_connection,
-    proto::*,
-    sys::{AsyncSocket, SocketAddr},
-};
-
-//use netlink_packet_xfrm::{
-//    constants::*,
-//    XfrmMessage,
-//};
+use netlink_packet_core::NetlinkPayload;
+use netlink_proto::sys::{AsyncSocket, SocketAddr};
+use xfrmnetlink::new_connection;
 
 #[tokio::main]
 async fn main() -> Result<(), String> {

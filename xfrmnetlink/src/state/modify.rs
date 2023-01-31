@@ -225,7 +225,7 @@ impl StateModifyRequest {
         self.message.nlas.push(XfrmAttrs::ExtraFlags(flags));
         self
     }
-    pub fn security_context(mut self, secctx: &Vec<u8>) -> Self {
+    pub fn security_context(mut self, secctx: &[u8]) -> Self {
         let mut sc = SecurityCtx::default();
 
         sc.context(secctx);

@@ -5,15 +5,6 @@
 
 #![allow(clippy::module_inception)]
 
-pub use netlink_packet_xfrm as packet;
-pub mod proto {
-    pub use netlink_proto::{
-        packet::{NetlinkMessage, NetlinkPayload},
-        Connection, ConnectionHandle, Error,
-    };
-}
-pub use netlink_proto::sys;
-
 mod connection;
 pub use crate::connection::*;
 

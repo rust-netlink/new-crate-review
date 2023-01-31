@@ -4,12 +4,11 @@ use std::io;
 
 use futures::channel::mpsc::UnboundedReceiver;
 
-use crate::{
-    packet::{NetlinkMessage, XfrmMessage},
-    proto::Connection,
-    sys::{protocols::NETLINK_XFRM, AsyncSocket, SocketAddr},
-    Handle,
-};
+use crate::Handle;
+use netlink_packet_core::NetlinkMessage;
+use netlink_packet_xfrm::XfrmMessage;
+use netlink_proto::sys::{protocols::NETLINK_XFRM, AsyncSocket, SocketAddr};
+use netlink_proto::Connection;
 
 #[cfg(feature = "tokio_socket")]
 #[allow(clippy::type_complexity)]

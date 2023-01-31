@@ -3,9 +3,8 @@
 #[macro_export]
 macro_rules! try_xfrmnl {
     ($msg: expr, $message_type:path) => {{
-        use netlink_packet_xfrm::{
-            NetlinkMessage, NetlinkPayload, XfrmMessage,
-        };
+        use netlink_packet_core::{NetlinkMessage, NetlinkPayload};
+        use netlink_packet_xfrm::XfrmMessage;
         use $crate::Error;
 
         let (header, payload) = $msg.into_parts();
@@ -24,7 +23,7 @@ macro_rules! try_xfrmnl {
 #[macro_export]
 macro_rules! try_nl {
     ($msg: expr) => {{
-        use netlink_packet_xfrm::NetlinkPayload;
+        use netlink_packet_core::NetlinkPayload;
         use $crate::Error;
         if let NetlinkPayload::Error(err) = $msg.payload {
             return Err(Error::NetlinkError(err));

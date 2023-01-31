@@ -1,13 +1,11 @@
 // SPDX-License-Identifier: MIT
 
 use futures::stream::StreamExt;
+use netlink_packet_core::NetlinkPayload;
+use netlink_proto::sys::{AsyncSocket, SocketAddr};
 use std::env;
-use xfrmnetlink::{
-    new_connection,
-    proto::*,
-    sys::{AsyncSocket, SocketAddr},
-    Error, Handle,
-};
+use xfrmnetlink::{new_connection, Error, Handle};
+
 mod cli_parse;
 use cli_parse::{state_add_upd_parse_args, StateAddUpdCliArgs};
 

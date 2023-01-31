@@ -1,11 +1,10 @@
 // SPDX-License-Identifier: MIT
 
 use std::env;
+use xfrmnetlink::{new_connection, Error, Handle};
 
 mod cli_parse;
 use cli_parse::{state_flush_parse_args, StateFlushCliArgs};
-
-use xfrmnetlink::{new_connection, Error, Handle};
 
 #[tokio::main]
 async fn main() -> Result<(), ()> {
