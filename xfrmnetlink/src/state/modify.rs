@@ -4,8 +4,8 @@ use futures::stream::StreamExt;
 use std::ffi::CString;
 use std::net::IpAddr;
 
+use crate::{try_nl, Error, Handle};
 use netlink_packet_core::{NetlinkMessage, NLM_F_ACK, NLM_F_REQUEST};
-
 use netlink_packet_xfrm::{
     constants::*, state::ModifyMessage, Address, Alg, AlgAead, AlgAuth,
     EncapTmpl, Mark, Replay, ReplayEsn, SecurityCtx, UserOffloadDev, XfrmAttrs,
@@ -13,9 +13,8 @@ use netlink_packet_xfrm::{
     XFRM_ALG_NAME_LEN,
 };
 
-use crate::{try_nl, Error, Handle};
-
 /// A request to add or update xfrm state. This is equivalent to the `ip xfrm state add|update` commands.
+#[non_exhaustive]
 pub struct StateModifyRequest {
     handle: Handle,
     message: ModifyMessage,

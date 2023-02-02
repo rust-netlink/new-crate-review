@@ -7,17 +7,16 @@ use futures::{
 };
 use std::net::IpAddr;
 
+use crate::{try_xfrmnl, Error, Handle};
 use netlink_packet_core::{NetlinkMessage, NLM_F_REQUEST};
-
 use netlink_packet_xfrm::{
     constants::*,
     state::{AllocSpiMessage, ModifyMessage},
     Address, Mark, XfrmAttrs, XfrmMessage,
 };
 
-use crate::{try_xfrmnl, Error, Handle};
-
 /// A request to allocate a SPI for an xfrm state. This is equivalent to the `ip xfrm state allocspi` command.
+#[non_exhaustive]
 pub struct StateAllocSpiRequest {
     handle: Handle,
     message: AllocSpiMessage,

@@ -8,17 +8,16 @@ use futures::{
 };
 use std::net::IpAddr;
 
+use crate::{try_xfrmnl, Error, Handle};
 use netlink_packet_core::{NetlinkMessage, NLM_F_DUMP, NLM_F_REQUEST};
-
 use netlink_packet_xfrm::{
     constants::*,
     policy::{DelGetMessage, ModifyMessage},
     Address, Mark, SecurityCtx, UserPolicyType, XfrmAttrs, XfrmMessage,
 };
 
-use crate::{try_xfrmnl, Error, Handle};
-
 /// A request to get xfrm policies. This is equivalent to the `ip xfrm policy get` command.
+#[non_exhaustive]
 pub struct PolicyGetRequest {
     handle: Handle,
     message: DelGetMessage,

@@ -1,14 +1,12 @@
 // SPDX-License-Identifier: MIT
 
+use crate::{try_nl, try_xfrmnl, Error, Handle};
 use futures::stream::StreamExt;
-
 use netlink_packet_core::{NetlinkMessage, NLM_F_ACK, NLM_F_REQUEST};
-
 use netlink_packet_xfrm::{policy::DefaultMessage, XfrmMessage};
 
-use crate::{try_nl, try_xfrmnl, Error, Handle};
-
 /// A request to get the default xfrm action for input, output, forward policies. This is equivalent to the `ip xfrm policy getdefault` command.
+#[non_exhaustive]
 pub struct PolicyGetDefaultRequest {
     handle: Handle,
     message: DefaultMessage,
@@ -48,6 +46,7 @@ impl PolicyGetDefaultRequest {
 }
 
 /// A request to set the default xfrm action for input, output, forward policies. This is equivalent to the `ip xfrm policy setdefault` command.
+#[non_exhaustive]
 pub struct PolicySetDefaultRequest {
     handle: Handle,
     message: DefaultMessage,

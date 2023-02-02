@@ -8,6 +8,7 @@ use netlink_packet_xfrm::XfrmMessage;
 use netlink_proto::{sys::SocketAddr, ConnectionHandle};
 
 #[derive(Clone, Debug)]
+#[non_exhaustive]
 pub struct Handle(ConnectionHandle<XfrmMessage>);
 
 impl Handle {

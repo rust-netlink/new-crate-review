@@ -2,16 +2,15 @@
 
 use futures::stream::StreamExt;
 
+use crate::{try_xfrmnl, Error, Handle};
 use netlink_packet_core::{NetlinkMessage, NLM_F_ACK, NLM_F_REQUEST};
-
 use netlink_packet_xfrm::{
     state::{GetSadInfoMessage, NewSadInfoMessage},
     XfrmMessage,
 };
 
-use crate::{try_xfrmnl, Error, Handle};
-
 /// A request to get xfrm state statistics. This is equivalent to the `ip xfrm state count` command.
+#[non_exhaustive]
 pub struct StateGetSadInfoRequest {
     handle: Handle,
     message: GetSadInfoMessage,

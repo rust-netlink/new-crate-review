@@ -6,6 +6,7 @@ use netlink_packet_core::{ErrorMessage, NetlinkMessage};
 use netlink_packet_xfrm::XfrmMessage;
 
 #[derive(Clone, Eq, PartialEq, Debug, Error)]
+#[non_exhaustive]
 pub enum Error {
     #[error("Received an unexpected message {0:?}")]
     UnexpectedMessage(NetlinkMessage<XfrmMessage>),

@@ -7,17 +7,16 @@ use futures::{
 };
 use std::net::IpAddr;
 
+use crate::{try_xfrmnl, Error, Handle};
 use netlink_packet_core::{NetlinkMessage, NLM_F_DUMP, NLM_F_REQUEST};
-
 use netlink_packet_xfrm::{
     constants::*,
     state::{DelGetMessage, GetDumpMessage, ModifyMessage},
     Address, AddressFilter, Mark, XfrmAttrs, XfrmMessage,
 };
 
-use crate::{try_xfrmnl, Error, Handle};
-
 /// A request to get xfrm state. This is equivalent to the `ip xfrm state get` command.
+#[non_exhaustive]
 pub struct StateGetRequest {
     handle: Handle,
     message: DelGetMessage,
@@ -105,6 +104,7 @@ impl StateGetRequest {
 }
 
 /// A request to dump xfrm states. This is equivalent to the `ip xfrm state list` command.
+#[non_exhaustive]
 pub struct StateGetDumpRequest {
     handle: Handle,
     message: GetDumpMessage,

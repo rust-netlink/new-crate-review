@@ -9,6 +9,7 @@ use super::{
 };
 use crate::Handle;
 
+#[non_exhaustive]
 pub struct StateHandle(Handle);
 
 impl StateHandle {

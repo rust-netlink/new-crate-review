@@ -3,16 +3,15 @@
 use futures::stream::StreamExt;
 use std::net::IpAddr;
 
+use crate::{try_nl, Error, Handle};
 use netlink_packet_core::{NetlinkMessage, NLM_F_ACK, NLM_F_REQUEST};
-
 use netlink_packet_xfrm::{
     constants::*, policy::DelGetMessage, Address, Mark, SecurityCtx,
     UserPolicyType, XfrmAttrs, XfrmMessage,
 };
 
-use crate::{try_nl, Error, Handle};
-
 /// A request to delete xfrm policies. This is equivalent to the `ip xfrm policy delete` command.
+#[non_exhaustive]
 pub struct PolicyDeleteRequest {
     handle: Handle,
     message: DelGetMessage,
